@@ -1,0 +1,98 @@
+let animal = {
+  eats: true,
+  walk() {
+    alert("Animal walk");
+  }
+};
+
+let rabbit = {
+  jumps: true,
+  __proto__: animal
+};
+
+let longEar = {
+  earLength: 10,
+  __proto__: rabbit
+};
+
+// walk is taken from the prototype chain
+longEar.walk(); // Animal walk
+alert(longEar.jumps); // true (from rabbit)
+...................
+let animal={
+    run:true,
+    walk()
+    {
+        console.log("animal run");
+    }
+};
+
+let rabbit=
+{
+    eat:true,
+    __proto__:animal
+};
+
+
+rabbit.walk(); // animal run
+console.log(rabbit.run); // true
+rabbit.walk=function ()
+{
+    console.log("run rabbit raun");
+}
+rabbit.walk(); // run rabbit run
+
+rabbit.run=false;
+console.log(rabbit.run); // false
+console.log(animal); //{ run: true, walk: [Function: walk] }
+console.log(rabbit); //{ eat: true, walk: [Function], run: false }
+
+let dog={
+    __proto__:animal,
+ //   __proto__:rabbit why not add it ,it show duplicate not allowed in prototype
+};
+console.log(dog.eat); // undefined
+console.log(dog.run); // true
+dog.walk(); // animal run
+.......................
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+Person.nationality = "English";
+
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+console.log(myFather);
+
+console.log(myMother);
+console.log(myFather.nationality); // undefinedd
+..............To add a new property to a constructor, you must add it to the constructor function:
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+  this.nationality = "English";
+}
+
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+console.log(myFather.nationality); // english
+..............
+function Person(first, last, age, eyecolor) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eyecolor;
+}
+
+Person.prototype.name = function() {
+  return this.firstName + " " + this.lastName;
+};
+const myFather = new Person("John", "Doe", 50, "blue");
+console.log(myFather.name()); 
+
